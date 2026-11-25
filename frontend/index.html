@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ScholarReady HP | Scholarship Portal</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+
+        <div class="logo">
+            <span class="logo-icon">S</span>
+            <h2>ScholarReady <span>HP</span></h2>
+        </div>
+
+        <nav class="navbar">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#scholarships">Scholarships</a>
+            <a href="#documents">My Documents</a>
+            <a href="#applications">Applications</a>
+        </nav>
+
+        <div class="profile">
+            <span class="profile-icon">M</span>
+            <span>Student</span>
+        </div>
+
+    </header>
+
+
+    <!-- Main Section -->
+    <main>
+
+        <!-- Dashboard Section -->
+        <section class="dashboard" id="dashboard">
+
+            <div class="welcome-section">
+
+                <div>
+                    <p class="small-heading">STUDENT DASHBOARD</p>
+
+                    <h1>Welcome to ScholarReady HP!</h1>
+
+                    <p>
+                        Discover scholarships, check your eligibility
+                        and manage your applications in one place.
+                    </p>
+
+                    <a href="#scholarships" class="primary-btn">
+                        Explore Scholarships
+                    </a>
+                </div>
+
+                <div class="welcome-icon">
+                    🎓
+                </div>
+
+            </div>
+
+
+            <!-- Statistics Cards -->
+            <div class="stats-container">
+
+                <div class="stat-card">
+                    <span class="stat-icon">📚</span>
+                    <h3>12</h3>
+                    <p>Available Scholarships</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📝</span>
+                    <h3>03</h3>
+                    <p>My Applications</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📁</span>
+                    <h3>05</h3>
+                    <p>Uploaded Documents</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">✅</span>
+                    <h3>02</h3>
+                    <p>Eligible Scholarships</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Scholarships Section -->
+        <section class="section" id="scholarships">
+
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">FIND YOUR OPPORTUNITY</p>
+                    <h2>Available Scholarships</h2>
+                </div>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-container">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search scholarships..."
+                >
+
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="state">State Scholarship</option>
+                    <option value="central">Central Scholarship</option>
+                </select>
+
+                <button id="searchBtn" class="primary-btn">
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- Scholarship Cards -->
+            <div class="scholarship-container" id="scholarshipContainer">
+
+                <div class="scholarship-card" data-category="state">
+
+                    <span class="category-tag">State Scholarship</span>
+
+                    <h3>Dr. Ambedkar Medhavi Chattervriti Yojana</h3>
+
+                    <p>
+                        A scholarship scheme for eligible students
+                        of Himachal Pradesh.
+                    </p>
+
+                    <p class="scholarship-info">
+                        <strong>Location:</strong> Himachal Pradesh
+                    </p>
+
+                    <button class="secondary-btn eligibility-btn">
+                        Check Eligibility
+                    </button>
+
+                </div>
+
+
+                <div class="scholarship-card" data-category="central">
+
+                    <span class="category-tag">Central Scholarship</span>
+
+                    <h3>National Scholarship Portal (NSP)</h3>
+
+                    <p>
+                        Explore central government scholarship
+                        opportunities for eligible students.
+                    </p>
+
+                    <p class="scholarship-info">
+                        <strong>Location:</strong> All India
+                    </p>
+
+                    <button class="secondary-btn eligibility-btn">
+                        Check Eligibility
+                    </button>
+
+                </div>
+
+
+                <div class="scholarship-card" data-category="state">
+
+                    <span class="category-tag">State Scholarship</span>
+
+                    <h3>Swami Vivekananda Utkrisht Chatravriti Yojana</h3>
+
+                    <p>
+                        Scholarship assistance for eligible
+                        meritorious students.
+                    </p>
+
+                    <p class="scholarship-info">
+                        <strong>Location:</strong> Himachal Pradesh
+                    </p>
+
+                    <button class="secondary-btn eligibility-btn">
+                        Check Eligibility
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Eligibility Checker -->
+        <section class="section eligibility-section" id="eligibility">
+
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">CHECK YOUR REQUIREMENTS</p>
+                    <h2>Scholarship Eligibility Checker</h2>
+                </div>
+            </div>
+
+            <div class="eligibility-box">
+
+                <form id="eligibilityForm">
+
+                    <div class="form-group">
+
+                        <label for="studentState">
+                            Select Your State
+                        </label>
+
+                        <select id="studentState" required>
+
+                            <option value="">Select State</option>
+
+                            <option value="Himachal Pradesh">
+                                Himachal Pradesh
+                            </option>
+
+                            <option value="Other">
+                                Other State
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="studentCourse">
+                            Select Your Course
+                        </label>
+
+                        <select id="studentCourse" required>
+
+                            <option value="">Select Course</option>
+
+                            <option value="BCA">BCA</option>
+                            <option value="BA">BA</option>
+                            <option value="BSc">BSc</option>
+                            <option value="BCom">BCom</option>
+                            <option value="BTech">BTech</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="familyIncome">
+                            Annual Family Income
+                        </label>
+
+                        <input
+                            type="number"
+                            id="familyIncome"
+                            placeholder="Enter annual family income"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button type="submit" class="primary-btn">
+                        Check Eligibility
+                    </button>
+
+                </form>
+
+                <div id="eligibilityResult"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- My Documents Section -->
+        <section class="section" id="documents">
+
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">DOCUMENT MANAGEMENT</p>
+                    <h2>My Documents</h2>
+                </div>
+            </div>
+
+            <div class="document-container">
+
+                <div class="document-card">
+                    <span>🪪</span>
+                    <h3>Aadhaar Card</h3>
+                    <p>Identity Proof</p>
+                </div>
+
+                <div class="document-card">
+                    <span>📄</span>
+                    <h3>Income Certificate</h3>
+                    <p>Income Proof</p>
+                </div>
+
+                <div class="document-card">
+                    <span>🏠</span>
+                    <h3>Domicile Certificate</h3>
+                    <p>Residence Proof</p>
+                </div>
+
+                <div class="document-card">
+                    <span>🎓</span>
+                    <h3>Bonafide Certificate</h3>
+                    <p>Student Proof</p>
+                </div>
+
+                <div class="document-card">
+                    <span>📑</span>
+                    <h3>Marksheet</h3>
+                    <p>Academic Proof</p>
+                </div>
+
+                <div class="document-card">
+                    <span>🏦</span>
+                    <h3>Bank Details</h3>
+                    <p>Bank Account Proof</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Applications Section -->
+        <section class="section" id="applications">
+
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">TRACK YOUR PROGRESS</p>
+                    <h2>My Applications</h2>
+                </div>
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Scholarship Name</th>
+                            <th>Application Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>State Scholarship</td>
+                            <td>15 Nov 2026</td>
+                            <td>
+                                <span class="status pending">Pending</span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Central Scholarship</td>
+                            <td>10 Nov 2026</td>
+                            <td>
+                                <span class="status approved">Approved</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- Student Profile -->
+        <section class="section" id="profile">
+
+            <div class="section-heading">
+                <div>
+                    <p class="small-heading">PERSONAL INFORMATION</p>
+                    <h2>Student Profile</h2>
+                </div>
+            </div>
+
+            <div class="profile-card">
+
+                <div class="profile-avatar">M</div>
+
+                <div>
+                    <h3>Student Name</h3>
+                    <p>Course: BCA</p>
+                    <p>State: Himachal Pradesh</p>
+                    <p>Institution: Eternal University</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <h3>ScholarReady HP</h3>
+
+        <p>
+            Helping students discover educational opportunities.
+        </p>
+
+        <p>
+            © 2026 ScholarReady HP. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
