@@ -39,7 +39,12 @@ const studentSchema = new mongoose.Schema(
     type: String,
     required: true,
     minlength: 8
-    }
+    },
+    role: {
+    type: String,
+    enum: ["student", "admin"],
+    default: "student"
+}
   },
   {
     timestamps: true

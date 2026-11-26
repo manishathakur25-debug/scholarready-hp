@@ -113,11 +113,14 @@ router.post("/login", async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign(
-      { id: student._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
+const token = jwt.sign(
+    {
+        id: student._id,
+        role: student.role || "student"
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "1d" }
+);
 
     // Hide password
     const studentData = student.toObject();

@@ -48,6 +48,7 @@
     <!-- Main Section -->
     <main>
 
+
         <!-- Dashboard Section -->
         <section class="dashboard" id="dashboard">
 
@@ -422,11 +423,181 @@
                     <p>Course: BCA</p>
                     <p>State: Himachal Pradesh</p>
                     <p>Institution: Eternal University</p>
+
+                    <p id="profileMessage"></p>
                 </div>
 
             </div>
 
         </section>
+
+
+<!-- Student Registration Section -->
+<section class="section" id="register">
+
+    <div class="section-heading">
+        <div>
+            <p class="small-heading">CREATE YOUR ACCOUNT</p>
+            <h2>Student Registration</h2>
+        </div>
+    </div>
+
+    <div class="eligibility-box">
+
+        <form id="registerForm">
+
+            <div class="form-group">
+                <label for="registerName">Full Name</label>
+                <input type="text" id="registerName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registerPhone">Phone</label>
+                <input type="tel" id="registerPhone">
+            </div>
+
+            <div class="form-group">
+                <label for="registerDistrict">District</label>
+                <input type="text" id="registerDistrict" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registerCourse">Course</label>
+                <input type="text" id="registerCourse" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registerIncome">Annual Family Income</label>
+                <input type="number" id="registerIncome" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" minlength="8" required>
+            </div>
+
+            <button type="submit" class="primary-btn">
+                Register
+            </button>
+
+        </form>
+
+        <p id="registerMessage"></p>
+
+    </div>
+
+</section>
+
+
+<!-- Student Login Section -->
+<section class="section" id="login">
+    <div class="section-heading">
+        <div>
+            <p class="small-heading">WELCOME BACK</p>
+            <h2>Student Login</h2>
+        </div>
+    </div>
+
+    <div class="eligibility-box">
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+
+            <button type="submit" class="primary-btn">
+                Login
+            </button>
+            <button type="button" class="secondary-btn" id="logoutBtn">
+    Logout
+</button>
+        </form>
+
+        <p id="loginMessage"></p>
+    </div>
+</section>
+
+
+
+<!-- Admin Scholarship Section -->
+<section class="section" id="admin">
+
+    <div class="section-heading">
+        <div>
+            <p class="small-heading">ADMIN PANEL</p>
+            <h2>Add New Scholarship</h2>
+        </div>
+    </div>
+
+    <div class="eligibility-box">
+
+        <form id="scholarshipForm">
+
+            <div class="form-group">
+                <label for="scholarshipName">Scholarship Name</label>
+                <input type="text" id="scholarshipName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipCategory">Category</label>
+                <select id="scholarshipCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="state">State</option>
+                    <option value="central">Central</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipDescription">Description</label>
+                <textarea id="scholarshipDescription" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipAmount">Amount</label>
+                <input type="number" id="scholarshipAmount" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipEligibility">Eligibility</label>
+                <textarea id="scholarshipEligibility" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipState">State</label>
+                <input type="text" id="scholarshipState" value="Himachal Pradesh">
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipLastDate">Last Date</label>
+                <input type="date" id="scholarshipLastDate">
+            </div>
+
+            <div class="form-group">
+                <label for="scholarshipLink">Application Link</label>
+                <input type="url" id="scholarshipLink">
+            </div>
+
+            <button type="submit" class="primary-btn">
+                Add Scholarship
+            </button>
+
+        </form>
+
+        <p id="scholarshipMessage"></p>
+
+    </div>
+
+</section>
 
     </main>
 

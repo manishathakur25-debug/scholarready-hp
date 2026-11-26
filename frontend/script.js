@@ -3,24 +3,7 @@
    1. SCHOLARSHIP DATA
 ===================================== */
 
-const scholarships = [
-    {
-        name: "Dr. Ambedkar Medhavi Chattervriti Yojana",
-        category: "state",
-        description: "Scholarship assistance for eligible Himachal Pradesh students."
-    },
-    {
-        name: "National Scholarship Portal (NSP)",
-        category: "central",
-        description: "Explore central government scholarship opportunities."
-    },
-    {
-        name: "Swami Vivekananda Utkrisht Chatravriti Yojana",
-        category: "state",
-        description: "Financial assistance for eligible meritorious students."
-    }
-];
-
+let scholarships = [];
 
 /* =====================================
    2. SCHOLARSHIP SEARCH
@@ -78,6 +61,28 @@ function displayScholarships(data) {
 
     });
 
+}
+
+async function fetchScholarships() {
+    try {
+        const response = await fetch("/api/scholarships");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch scholarships");
+        }
+
+        const result = await response.json();
+
+        scholarships = result.data;
+
+        displayScholarships(scholarships);
+
+    } catch (error) {
+        console.error("Error fetching scholarships:", error);
+
+        scholarshipContainer.textContent =
+            "Unable to load scholarships. Please try again later.";
+    }
 }
 
 
@@ -243,8 +248,223 @@ documentCards.forEach((card) => {
 
 
 
+fetchScholarships();
 
-displayScholarships(scholarships);
 
 console.log("ScholarReady HP JavaScript loaded successfully!");
+
+
+// STUDENT REGISTRATION
+
+const registerForm = document.getElementById("registerForm");
+const registerMessage = document.getElementById("registerMessage");
+
+registerForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const studentData = {
+        name: document.getElementById("registerName").value.trim(),
+        email: document.getElementById("registerEmail").value.trim(),
+        phone: document.getElementById("registerPhone").value.trim(),
+        district: document.getElementById("registerDistrict").value.trim(),
+        course: document.getElementById("registerCourse").value.trim(),
+        annualIncome: Number(document.getElementById("registerIncome").value),
+        password: document.getElementById("registerPassword").value
+    };
+
+    try {
+        const response = await fetch("/api/students/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(studentData)
+        });
+
+        const responseText = await response.text();
+
+        const result = responseText
+            ? JSON.parse(responseText)
+            : {};
+
+        if (!response.ok) {
+            throw new Error(result.message || "Registration failed");
+        }
+
+        registerMessage.textContent = result.message || "Registration successful!";
+        registerForm.reset();
+
+    } catch (error) {
+        console.error("Registration error:", error);
+        registerMessage.textContent = error.message;
+    }
+});
+
+
+
+/* =====================================
+   7. STUDENT LOGIN
+===================================== */
+
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("loginMessage");
+
+loginForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    console.log("Login form submitted");
+
+    const loginData = {
+        email: document.getElementById("loginEmail").value.trim(),
+        password: document.getElementById("loginPassword").value
+    };
+
+    try {
+        const response = await fetch("/api/students/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(loginData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Login failed");
+        }
+
+        sessionStorage.setItem("token", result.token);
+
+        loginMessage.textContent = "Login successful!";
+
+        await fetchStudentProfile();
+
+    } catch (error) {
+        console.error("Login error:", error);
+        loginMessage.textContent = error.message;
+    }
+
+});
+
+
+
+/* =====================================
+   8. STUDENT PROFILE
+===================================== */
+
+async function fetchStudentProfile() {
+
+    const token = sessionStorage.getItem("token");
+
+    const profileMessage = document.getElementById("profileMessage");
+
+    if (!token) {
+        profileMessage.textContent = "Please login to view your profile.";
+        return;
+    }
+
+    try {
+        const response = await fetch("/api/students/profile", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Unable to fetch profile");
+        }
+
+        const student = result.data;
+
+        profileMessage.innerHTML = `
+            <p><strong>Name:</strong> ${student.name}</p>
+            <p><strong>Email:</strong> ${student.email}</p>
+            <p><strong>Phone:</strong> ${student.phone || "Not provided"}</p>
+            <p><strong>District:</strong> ${student.district}</p>
+            <p><strong>Course:</strong> ${student.course}</p>
+            <p><strong>Annual Income:</strong> ₹${student.annualIncome}</p>
+        `;
+
+    } catch (error) {
+        console.error("Profile error:", error);
+        profileMessage.textContent = error.message;
+    }
+}
+
+
+
+/* =====================================
+   9. STUDENT LOGOUT
+===================================== */
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", function() {
+
+    sessionStorage.removeItem("token");
+
+    document.getElementById("loginMessage").textContent =
+        "You have been logged out successfully.";
+
+    document.getElementById("profileMessage").textContent =
+        "Please login to view your profile.";
+
+});
+
+/* =====================================
+   10. ADD SCHOLARSHIP
+===================================== */
+
+const scholarshipForm = document.getElementById("scholarshipForm");
+const scholarshipMessage = document.getElementById("scholarshipMessage");
+
+scholarshipForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const scholarshipData = {
+        name: document.getElementById("scholarshipName").value.trim(),
+        category: document.getElementById("scholarshipCategory").value,
+        description: document.getElementById("scholarshipDescription").value.trim(),
+        amount: document.getElementById("scholarshipAmount").value
+            ? Number(document.getElementById("scholarshipAmount").value)
+            : null,
+        eligibility: document.getElementById("scholarshipEligibility").value.trim(),
+        state: document.getElementById("scholarshipState").value.trim(),
+        lastDate: document.getElementById("scholarshipLastDate").value || null,
+        applicationLink: document.getElementById("scholarshipLink").value.trim()
+    };
+
+    try {
+        const response = await fetch("/api/scholarships", {
+            method: "POST",
+headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${sessionStorage.getItem("token")}`
+},
+            body: JSON.stringify(scholarshipData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Unable to add scholarship");
+        }
+
+        scholarshipMessage.textContent = "Scholarship added successfully!";
+
+        scholarshipForm.reset();
+
+        await fetchScholarships();
+
+    } catch (error) {
+        console.error("Scholarship error:", error);
+        scholarshipMessage.textContent = error.message;
+    }
+});
 

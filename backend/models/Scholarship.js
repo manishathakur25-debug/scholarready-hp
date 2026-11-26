@@ -5,6 +5,13 @@ const scholarshipSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      required: true,
+      trim: true
+    },
+
+    category: {
+      type: String,
+      enum: ["state", "central"],
       required: true
     },
 
@@ -15,7 +22,7 @@ const scholarshipSchema = new mongoose.Schema(
 
     amount: {
       type: Number,
-      required: true
+      default: null
     },
 
     eligibility: {
@@ -29,11 +36,13 @@ const scholarshipSchema = new mongoose.Schema(
     },
 
     lastDate: {
-      type: Date
+      type: Date,
+      default: null
     },
 
     applicationLink: {
-      type: String
+      type: String,
+      default: ""
     }
   },
   {

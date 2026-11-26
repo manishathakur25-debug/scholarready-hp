@@ -1,53 +1,69 @@
 
 import express from "express";
-import Student from "../models/Student.js";
-
+import Scholarship from "../models/Scholarship.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import adminMiddleware from "../middleware/adminMiddleware.js";
 const router = express.Router();
 
-// POST: Register a student
-router.post("/register", async (req, res) => {
+
+
+// POST: Add a new scholarship
+router.post("/", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const {
       name,
-      email,
-      phone,
-      district,
-      course,
-      annualIncome
+      category,
+      description,
+      amount,
+      eligibility,
+      state,
+      lastDate,
+      applicationLink
     } = req.body;
 
-    // Check required fields
-    if (!name || !email || !district || !course || annualIncome === undefined) {
+    if (!name || !category || !description || !eligibility) {
       return res.status(400).json({
         success: false,
         message: "Please fill all required fields"
       });
     }
 
-    // Check duplicate email
-    const existingStudent = await Student.findOne({ email });
-
-    if (existingStudent) {
-      return res.status(409).json({
-        success: false,
-        message: "Student already registered with this email"
-      });
-    }
-
-    // Create student
-    const newStudent = await Student.create({
+    const scholarship = await Scholarship.create({
       name,
-      email,
-      phone,
-      district,
-      course,
-      annualIncome
+      category,
+      description,
+      amount,
+      eligibility,
+      state,
+      lastDate,
+      applicationLink
     });
 
     res.status(201).json({
       success: true,
-      message: "Student registered successfully",
-      data: newStudent
+      message: "Scholarship added successfully",
+      data: scholarship
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// GET: Fetch all scholarships
+router.get("/", async (req, res) => {
+  try {
+    const scholarships = await Scholarship.find().sort({
+      createdAt: -1
+    });
+
+    res.status(200).json({
+      success: true,
+      count: scholarships.length,
+      data: scholarships
     });
 
   } catch (error) {
@@ -58,19 +74,27 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// GET: All students
-router.get("/", async (req, res) => {
+// GET: Fetch scholarship by ID
+router.get("/:id", async (req, res) => {
   try {
-    const students = await Student.find();
+    const scholarship = await Scholarship.findById(req.params.id);
+
+    if (!scholarship) {
+      return res.status(404).json({
+        success: false,
+        message: "Scholarship not found"
+      });
+    }
 
     res.status(200).json({
       success: true,
-      data: students
+      data: scholarship
     });
+
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
-      message: error.message
+      message: "Invalid scholarship ID"
     });
   }
 });
